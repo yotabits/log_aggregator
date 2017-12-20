@@ -32,6 +32,7 @@ Simply add the path of the files/directories you want to add to the tarball to ~
   --default_conf  WARNING: Delete your actual conf if it exists and generate
                   the default configuration file
   --local         Create a local tarball under home directory
+  --gui           A simple gui to help users
 ~~~~
 
 ### TODO ###
