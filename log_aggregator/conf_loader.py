@@ -101,7 +101,7 @@ def generate_default_conf(conf_file_path=None):
     if (conf_file_path is None):
         conf_file_path = get_default_conf_path()
 
-    default_file_list = ["latest_log", "~/.gopher_robot_environment.bash", "/var/log/syslog"]
+    default_file_list = ["latest_log", "~/.gopher_robot_environment.bash", "/var/log/syslog", "~/.ros/log/console_output.log"]
     conf_file_fp = open(conf_file_path, "w")
     for element in default_file_list:
         conf_file_fp.write(element + "\n")
@@ -112,12 +112,22 @@ def generate_default_conf(conf_file_path=None):
 
 
 def get_default_conf_path():
+    """
+    Return the absolute path of the configuration file
+    :return: configuration file path
+    """
     conf_file_name = '.log_to_nucrc'
     conf_file_path = expanduser("~/" + conf_file_name)
     return conf_file_path
 
 
 def add_entry_to_conf_file(entry_to_add, conf_file_path=None):
+    """
+    Add an entry to the configuration file
+    :param entry_to_add:  absolute or relative path of the file or directory to be added to the configuration file
+    :param conf_file_path:
+    :return:
+    """
     wrote = False
 
     if (entry_to_add == "" or entry_to_add == None):

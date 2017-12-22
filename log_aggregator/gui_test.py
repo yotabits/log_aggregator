@@ -1,16 +1,18 @@
 from appJar import gui
 import os
 import time
-import thread
+#import thread
+#from threading import Thread
 from opt_parser import manage_local, manage_conf_update, manage_show_conf
 
 
 class Gui:
     def __init__(self):
         self.app = gui(handleArgs=False)
-        self.create_progress_subwindow()
         self.configure_main_window()
-        self.launch_threads()
+        self.create_progress_subwindow()
+        #self.p_bar_thread = Thread(target=self.loop_progress,)
+        #self.p_bar_thread.start()
         self.app.go()
 
     def button_manager_main(self, button):
@@ -30,20 +32,17 @@ class Gui:
             self.app.setTextArea("pb_describe", "Describe your problem")
 
     def create_progress_subwindow(self):
-        self.app.startSubWindow("sub1", title="Pleas Wait...", modal=False, transient=False,)
+        self.app.startSubWindow("sub1", title="Please Wait...", modal=False, transient=True, blocking=False)
         self.app.addDualMeter("progress")
-        thread.start_new_thread(self.loop_progress,())
         self.app.setGeometry(300, 100)
         self.app.stopSubWindow()
 
     def loop_progress(self):
-        for i in range(0,100):
-            self.app.setMeter("progress", [i, i])
-            time.sleep(0.1)
-        self.loop_progress()
-
-    def launch_threads(self):
-        thread.start_new_thread(self.loop_progress, ())
+        while self.app:
+            for i in range(0,100):
+                print self.app.getMeter("progress")
+                self.app.setMeter("progress", [i, i])
+                time.sleep(0.1)
 
     def configure_main_window(self):
         self.app.addTextArea("pb_describe")

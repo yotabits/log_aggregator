@@ -35,6 +35,8 @@ def generate_filename():
     name += "_" + socket.gethostname()
     return name
 
+def gen_cpu_usage():
+    os.system("top -n4 -b > " + "~/cpu_usage")
 
 def prepare_tar(file_list):
     """
@@ -42,6 +44,8 @@ def prepare_tar(file_list):
     :param file_list:
     :return:
     """
+    gen_cpu_usage()
+    file_list.append(expanduser("~/cpu_usage"))
     name = generate_filename()
     folder_to_tar_path = expanduser("~/") + name + "/" #folder to be tared
     os.makedirs(folder_to_tar_path)
