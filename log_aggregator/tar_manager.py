@@ -36,7 +36,7 @@ def generate_filename():
     return name
 
 def gen_cpu_usage():
-    os.system("top -n4 -b > " + "~/cpu_usage")
+    os.system("top -n4 -b -c > " + "~/cpu_usage")
 
 def prepare_tar(file_list):
     """
