@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='log_aggregator',
-      version='0.21',
+      version='0.22',
       description='Create a configurable Tarball of various files in the file system',
       author='Thomas Kostas',
       url='https://github.com/yotabits/log_aggregator',
