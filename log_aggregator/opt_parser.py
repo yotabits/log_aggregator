@@ -4,7 +4,7 @@ import tar_manager
 
 def pars_args():
     parser = argparse.ArgumentParser(description="A simple, configurable software to tar a set of preconfigured log "
-                                                 "files.")
+                                                 "files.", prog='log_aggregator', version='0.22')
     parser.add_argument("--show_conf", action="store_true", default=False, help="Show the actual configuration file in"
                                                                                 " use if it exists")
 
