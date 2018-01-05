@@ -60,7 +60,7 @@ def prepare_tar(file_list):
             copyfile(real_path, folder_to_tar_path + "/" + filename)
 
     tar_name = tar_folder(folder_to_tar_path, name)
-    print ("Tar-ball successfully created under: " + tar_name)
+    print (colors.bcolors.OKGREEN + "Tar-ball successfully created under: "+ colors.bcolors.ENDC + tar_name)
     return tar_name, folder_to_tar_path
 
 def clean_up(tar, folder):
@@ -74,11 +74,9 @@ def clean_up(tar, folder):
     print(colors.bcolors.OKBLUE + "Starting clean up..." + colors.bcolors.ENDC)
     print(colors.bcolors.OKBLUE + "The following files will be deleted from local system:" + colors.bcolors.ENDC)
     if (tar):
-        print(colors.bcolors.OKGREEN + "-------->  " + colors.bcolors.ENDC +
-          colors.bcolors.FAIL + tar + colors.bcolors.ENDC)
+        print(colors.bcolors.FAIL + "-------->  " + colors.bcolors.ENDC + tar)
     if (folder):
-        print(colors.bcolors.OKGREEN + "-------->  " + colors.bcolors.ENDC +
-          colors.bcolors.FAIL + folder + colors.bcolors.ENDC)
+        print(colors.bcolors.FAIL + "-------->  " + colors.bcolors.ENDC + folder)
 
     if (tar):
         os.remove(tar)

@@ -52,7 +52,7 @@ def manage_local(parsed_args, no_check=False, description_file=None):
 def manage_show_conf(parsed_args, no_check=False):
     if (no_check or parsed_args.show_conf):
         if (conf_loader.check_conf_file_exist()):
-            conf_loader.check_create_load_conf(skip_check=True)
+            conf_loader.check_create_load_conf(skip_check=True, show_mode=True)
 
 
 def manage_default_conf(parsed_args):

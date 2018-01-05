@@ -24,7 +24,7 @@ def check_file_existence(files_list):
     return files_list, not_exist_list
 
 
-def check_create_load_conf(skip_check=False):
+def check_create_load_conf(skip_check=False, show_mode=False):
     """
     Firstly check if the configuration file ~/.log_to_nurc exist, create it if not, read the files to tar
     from this configuration file and check their existence.
@@ -42,8 +42,8 @@ def check_create_load_conf(skip_check=False):
         conf_file_fp = open(conf_file_path)
         line = conf_file_fp.readline()
         while line:
-            line = line.replace('\n','')
-            entry_files = manage_entries(line)
+            line = line.replace('\n', '')
+            entry_files = manage_entries(line, show_mode=show_mode)
             for file in entry_files:
                 files_list.append(file)
             line = conf_file_fp.readline()
@@ -53,6 +53,11 @@ def check_create_load_conf(skip_check=False):
         check_create_load_conf()
 
     files_list, not_exist_list = check_file_existence(files_list)
+
+    if(show_mode and "gopher_version_file" in not_exist_list):
+        not_exist_list.remove("gopher_version_file")
+        files_list.append("gopher_version_file")
+
     file_sent_displayer(files_list, not_exist_list)
     return files_list
 
@@ -72,7 +77,7 @@ def file_sent_displayer(files_list, not_exist_list):
         for file in not_exist_list:
             print (colors.bcolors.FAIL + "-------->  "+ colors.bcolors.ENDC + file)
         print colors.bcolors.FAIL + "Hint: To prevent this message from appearing again correct the previously listed " \
-                                    "entries under ~/.log_to_nucrc configuration file."
+                                    "entries under ~/.log_to_nucrc configuration file." + colors.bcolors.ENDC
 
 
 def check_conf_file_exist(conf_file_path=None):
@@ -101,7 +106,8 @@ def generate_default_conf(conf_file_path=None):
     if (conf_file_path is None):
         conf_file_path = get_default_conf_path()
 
-    default_file_list = ["latest_log", "~/.gopher_robot_environment.bash", "/var/log/syslog", "~/.ros/log/console_output.log"]
+    default_file_list = ["latest_log", "~/.gopher_robot_environment.bash", "/var/log/syslog",
+                         "gopher_version", "~/.ros/log/console_output.log"]
     conf_file_fp = open(conf_file_path, "w")
     for element in default_file_list:
         conf_file_fp.write(element + "\n")

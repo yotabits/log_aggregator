@@ -10,7 +10,8 @@ setup(name='log_aggregator',
       packages=['log_aggregator'],
       scripts=['bin/log_aggregator'],
       install_requires=['pycurl',
-                        'appjar'
+                        'appjar',
+                        'gopher_version'
       ],
       classifiers=[
         'Development Status :: 3 - Alpha',

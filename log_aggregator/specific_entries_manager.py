@@ -3,13 +3,17 @@ import os
 from os.path import expanduser, isdir
 from os import listdir
 import re
+import gopher_version_manager
 
 
-def manage_entries(entry):
+
+def manage_entries(entry, show_mode=False):
     """
     Some entries in the configuration file are not path but keywords, this function translate those keywords to
     path,
     :param entry: Value from the configuration file
+           show_mode:In case we are just showing the configuration file content this let us know that no operation
+           should be done
     :return: A list of paths "calculated" from entries found in the configuration file .log_to_nurc file
     """
     file_list = []
@@ -17,11 +21,20 @@ def manage_entries(entry):
     if (entry == 'latest_log'):
         file_list.append(manage_ros_log())
         return file_list
-    elif(robot_env_patten.match(entry)):
-        return  get_semantics_from_robot_env(entry)
+    elif (robot_env_patten.match(entry)):
+        return get_semantics_from_robot_env(entry)
+    elif (entry == 'gopher_version'):
+        return gen_version_file(show_mode)
 
     file_list.append(entry)
     return file_list
+
+
+def gen_version_file(show_mode):
+    if (show_mode):
+        return ["gopher_version_file"]
+    else:
+        return [gopher_version_manager.write_to_file()]
 
 def manage_ros_log():
     """
