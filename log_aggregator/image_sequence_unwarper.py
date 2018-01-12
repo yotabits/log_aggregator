@@ -236,6 +236,3 @@ def convert_video_to_image(log_path):
     video_stack_path_list = get_video_file_path_list(log_path)
     wrapper_list = gen_stack_wrapper_list(video_stack_path_list)
     gen_images_from_wrapper_list(wrapper_list, log_path, extra_data_present=True)
-
-
-convert_video_to_image("/home/tkostas")
