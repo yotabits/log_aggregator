@@ -1,5 +1,8 @@
 from PIL import Image
 from tqdm import tqdm
+#dirty workaround to fix api bug
+tqdm.monitor_interval = 0
+
 import os
 import re
 import struct
