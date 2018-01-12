@@ -4,6 +4,7 @@ from os.path import expanduser, isdir
 from os import listdir
 import re
 import gopher_version_manager
+from image_sequence_unwarper import  convert_video_to_image
 
 
 
@@ -70,7 +71,9 @@ def manage_ros_log():
     except IndexError:
         print (colors.bcolors.FAIL + "No log folder has been found une ~/.ros/log" + colors.bcolors.ENDC)
 
-    return latest + "/latest"
+    latest_log_path = latest + "/latest"
+    convert_video_to_image(latest_log_path)
+    return latest_log_path
 
 def get_semantics_from_robot_env(robot_env_file_path):
     """
