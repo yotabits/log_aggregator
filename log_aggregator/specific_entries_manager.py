@@ -20,7 +20,7 @@ def manage_entries(entry, show_mode=False):
     file_list = []
     robot_env_patten = re.compile('.*/.gopher_robot_environment.bash$')
     if (entry == 'latest_log'):
-        file_list.append(manage_ros_log())
+        file_list.append(manage_ros_log(show_mode))
         return file_list
     elif (robot_env_patten.match(entry)):
         return get_semantics_from_robot_env(entry)
@@ -37,7 +37,7 @@ def gen_version_file(show_mode):
     else:
         return [gopher_version_manager.write_to_file()]
 
-def manage_ros_log():
+def manage_ros_log(show_mode=False):
     """
     As .ros/log/latest symlink is broken we manually search the path to the last ros log.
 
@@ -72,7 +72,10 @@ def manage_ros_log():
         print (colors.bcolors.FAIL + "No log folder has been found une ~/.ros/log" + colors.bcolors.ENDC)
 
     latest_log_path = latest + "/latest"
-    convert_video_to_image(latest_log_path)
+    if not show_mode:
+        print ( colors.bcolors.OKBLUE + "Pre processing ROS log folder..." + colors.bcolors.ENDC)
+        convert_video_to_image(latest_log_path)
+        print ( colors.bcolors.OKBLUE + "Finish pre processing ROS log folder..." + colors.bcolors.ENDC)
     return latest_log_path
 
 def get_semantics_from_robot_env(robot_env_file_path):
