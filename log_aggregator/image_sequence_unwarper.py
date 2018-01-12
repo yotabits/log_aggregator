@@ -201,6 +201,7 @@ def gen_images_from_wrapper(img_stack_wrapper, log_path, extra_data_present=Fals
         raw_img = img_stack_wrapper.get_next_raw_img_and_extra_data()
 
     pbar = tqdm(total=100)
+    last_percent_read = 0
 
     while raw_img is not None:
         if not subdir_exist:
@@ -215,7 +216,11 @@ def gen_images_from_wrapper(img_stack_wrapper, log_path, extra_data_present=Fals
         dest_path = img_path + '/' + filename
         pil_img = Image.frombytes("RGB", (img_stack_wrapper.size_x, img_stack_wrapper.size_y), raw_img, decoder_name='raw')
         pil_img.save(dest_path, optimize=True)
-        pbar.update(img_stack_wrapper.get_percent_read())
+        
+        new_percent_read = img_stack_wrapper.get_percent_read()
+	progress = new_percent_read - last_percent_read
+        last_percent_read = new_percent_read
+        pbar.update(progress)
 
         if (extra_data_present):
             raw_img, extra_data = img_stack_wrapper.get_next_raw_img_and_extra_data()
