@@ -45,7 +45,7 @@ def manage_local(parsed_args, no_check=False, description_file=None):
         file_list = conf_loader.check_create_load_conf()
         if description_file:
             file_list.append(description_file)
-        tar_path , folder_to_tar_path = tar_manager.prepare_tar(file_list)
+        tar_path, folder_to_tar_path = tar_manager.prepare_tar(file_list)
         tar_manager.clean_up(None, folder_to_tar_path)
 
 

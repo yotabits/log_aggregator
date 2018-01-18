@@ -50,7 +50,7 @@ def check_create_load_conf(skip_check=False, show_mode=False):
     else:
         generate_default_conf(conf_file_path)
         print(colors.bcolors.OKGREEN + "Configuration file successfully created..." + colors.bcolors.ENDC)
-        check_create_load_conf()
+        return check_create_load_conf()
 
     files_list, not_exist_list = check_file_existence(files_list)
 
