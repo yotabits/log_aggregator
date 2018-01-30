@@ -11,7 +11,9 @@ setup(name='log_aggregator',
       scripts=['bin/log_aggregator'],
       install_requires=['pycurl',
                         'appjar',
-                        'gopher_robot_version'
+                        'gopher_robot_version',
+                        'pillow',
+                        'tqdm'
       ],
       classifiers=[
         'Development Status :: 3 - Alpha',
