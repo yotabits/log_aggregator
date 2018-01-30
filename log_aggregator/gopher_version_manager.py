@@ -1,7 +1,7 @@
 import colors
-from gopher_version import sys_packages
-from gopher_version import ros_packages
-from gopher_version import writer
+from gopher_robot_version import sys_packages
+from gopher_robot_version import ros_packages
+from gopher_robot_version import writer
 import os
 
 def prepare_string():
