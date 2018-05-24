@@ -24,7 +24,7 @@ def check_file_existence(files_list):
     return files_list, not_exist_list
 
 
-def check_create_load_conf(skip_check=False, show_mode=False):
+def check_create_load_conf(skip_check=False, show_mode=False, keep_raw=False):
     """
     Firstly check if the configuration file ~/.log_to_nurc exist, create it if not, read the files to tar
     from this configuration file and check their existence.
@@ -43,7 +43,7 @@ def check_create_load_conf(skip_check=False, show_mode=False):
         line = conf_file_fp.readline()
         while line:
             line = line.replace('\n', '')
-            entry_files = manage_entries(line, show_mode=show_mode)
+            entry_files = manage_entries(line, show_mode=show_mode, keep_raw=keep_raw)
             for file in entry_files:
                 files_list.append(file)
             line = conf_file_fp.readline()

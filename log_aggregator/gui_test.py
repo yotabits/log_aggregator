@@ -25,7 +25,7 @@ class Gui:
         if (button == "Tar Me"):
             description_file_path = self.get_description()
             self.app.showSubWindow("sub1")
-            manage_local(None, no_check=True, description_file=description_file_path)
+            manage_local(None, no_check=True, description_file=description_file_path, keep_raw=False)
             self.app.hideSubWindow("sub1")
             self.app.infoBox("success", "Success Fully created Tarball, Read console log for more details")
             self.app.clearTextArea("pb_describe")
