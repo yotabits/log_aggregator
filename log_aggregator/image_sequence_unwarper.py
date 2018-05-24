@@ -221,7 +221,7 @@ def gen_images_from_wrapper(img_stack_wrapper, log_path, extra_data_present=Fals
         pil_img.save(dest_path, optimize=True)
         
         new_percent_read = img_stack_wrapper.get_percent_read()
-	progress = new_percent_read - last_percent_read
+        progress = new_percent_read - last_percent_read
         last_percent_read = new_percent_read
         pbar.update(progress)
 
@@ -234,7 +234,7 @@ def gen_images_from_wrapper(img_stack_wrapper, log_path, extra_data_present=Fals
     print('\n')
 
 
-def convert_video_to_image(log_path):
+def convert_video_to_image(log_path, keep_raw):
     """
     Find raw/stack video files, and convert their content to png files under subdirectories named depending the raw file
     name.
@@ -244,3 +244,7 @@ def convert_video_to_image(log_path):
     video_stack_path_list = get_video_file_path_list(log_path)
     wrapper_list = gen_stack_wrapper_list(video_stack_path_list)
     gen_images_from_wrapper_list(wrapper_list, log_path, extra_data_present=True)
+    if keep_raw is False:
+        for file in video_stack_path_list:
+            os.remove(file)
+
