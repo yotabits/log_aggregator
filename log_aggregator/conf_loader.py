@@ -107,7 +107,7 @@ def generate_default_conf(conf_file_path=None):
         conf_file_path = get_default_conf_path()
 
     default_file_list = ["latest_log", "~/.gopher_robot_environment.bash", "/var/log/syslog",
-                         "gopher_version", "~/.ros/log/console_output.log"]
+                         "gopher_version", "~/.ros/log/console_output.log", "/proc/version"]
     conf_file_fp = open(conf_file_path, "w")
     for element in default_file_list:
         conf_file_fp.write(element + "\n")
