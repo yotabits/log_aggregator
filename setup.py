@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='log_aggregator',
-      version='0.41',
+      version='0.42',
       description='Create a configurable Tarball of various files in the file system',
       author='Thomas Kostas',
       url='https://github.com/yotabits/log_aggregator',
@@ -13,7 +13,8 @@ setup(name='log_aggregator',
                         'appjar',
                         'gopher_robot_version',
                         'pillow',
-                        'tqdm'
+                        'tqdm',
+                        'psutil'
       ],
       classifiers=[
         'Development Status :: 3 - Alpha',

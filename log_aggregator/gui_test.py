@@ -4,6 +4,7 @@ import time
 #import thread
 #from threading import Thread
 from opt_parser import manage_local, manage_conf_update, manage_show_conf
+from free_space_checker import check_disk_available
 
 
 class Gui:
@@ -16,13 +17,16 @@ class Gui:
         self.app.go()
 
     def button_manager_main(self, button):
-        if (button == "Validate file"):
+        if button == "Validate file":
             path = self.app.getEntry("file_path")
             manage_conf_update(None, path)
-        elif(button == "Show configuration"):
+        elif button == "Show configuration":
             manage_show_conf(None, no_check=True)
             self.app.infoBox("Take a look Closer", "Configuration file status displayed in console.")
-        if (button == "Tar Me"):
+        if button == "Tar Me":
+            space_available, enough_space = check_disk_available()
+            if enough_space is False:
+                self.app.infoBox("Warning !", "Only " + str(space_available) + " GB of disk space available")
             description_file_path = self.get_description()
             self.app.showSubWindow("sub1")
             manage_local(None, no_check=True, description_file=description_file_path, keep_raw=False)
